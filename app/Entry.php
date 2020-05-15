@@ -15,8 +15,22 @@ class Entry extends Model
 
     // mutator
 
-    public function setTittleAttribute($value)
+    public function setTitleAttribute($value)
     {
-    	$this->attributes['slug'] =str::slug($value);
+        $this->attributes['title']=$value;
+    	$this->attributes['slug']=Str::slug($value);
     }
+
+    // cambia el tipo de parametro de las funciones de id a slug 
+ /*   public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+*/
+    public function getUrl()
+    {
+        return url("entries/$this->slug-$this->id");
+    }
+
+    
 }
