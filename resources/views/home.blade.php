@@ -1,34 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    @if ($entries->isEmpty())
-                   <p>No tienes Entradas aun</p> 
-                   @else
-                   <p> Mis Entradas:</p>
-                   <ul>
-                       @foreach($entries as $entry)
-                       <li>
-                       <a href="{{$entry->getUrl()}}">{{$entry->title}}</a>
-                        </li>
-                       @endforeach
-                   </ul>
-                   @endif
-                </div>
-            </div>
-        </div>
-    </div>
+    <form-component></form-component>
 </div>
+
 @endsection

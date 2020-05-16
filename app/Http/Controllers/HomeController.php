@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Entry;
+use App\Tweet;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $entries= Entry::where('user_id',auth()->id())->get();
+        $entries= Tweet::where('user_id',auth()->id())->get();
 
         return view('home',compact('entries'));
     }

@@ -6,39 +6,37 @@
 
         <div class="col-md-4">
             <div class="card">
-                <div class="card-header">Tweets</div>
+                <div class="card-header">Tendencias</div>
 
                 <div class="card-body">
-                  Twitter Api (soon )
+                  Api twitter
 
                 </div>
             </div>
         </div>
         <div class="col-md-8">
+                   <h3 class="mb-4">Otros Tweet</h3>
             <div class="card">
-                <div class="card-header">{{$user->name}}</div>
+                  
+                @foreach($entries as $entry)
+    
+                <div class="card-header">
+                    <a href="{{url('@'.$entry->user->username)}}">
+                    {{$entry->user->name}} {{'@'.$entry->user->username}}
+                    </a>
+                </div>
 
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+                    <p>{{$entry->content}}</p>
+                </div>
 
-                  
-                    <p>Publicaciones:</p>
-                    <ul>
-                       @foreach($entries as $entry)
-                       <li>
-                            <a href="{{$entry->getUrl() }}">{{$entry->title}}</a>
-                       </li>
-                       @endforeach
-                   </ul>
-
+                <hr>
+                    
+                @endforeach
 
                 </div>
+
             </div>
         </div>
     </div>
-</div>
 @endsection

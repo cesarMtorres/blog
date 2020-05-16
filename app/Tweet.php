@@ -5,9 +5,10 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
-class Entry extends Model
+class Tweet extends Model
 {
     //
+    protected $table="entries";
     public function user()
     {
     	return $this->belongsTo(User::class);

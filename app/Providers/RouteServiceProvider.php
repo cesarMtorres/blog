@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Entry;
+use App\Tweet;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
 use App\Exceptions\InvalidEntrySlugException;
@@ -38,11 +38,8 @@ class RouteServiceProvider extends ServiceProvider
         Route::bind('entryBySlug',function($value){
 
             $parts=explode('-',$value);
-            $id=end($parts);
-
-
-
-            $entry=Entry::findOrFail($id);
+            $id=$parts[0];
+            $entry=Tweet::findOrFail($id);
             
             if ($entry->slug.'-'.$entry->id === $value)
             {

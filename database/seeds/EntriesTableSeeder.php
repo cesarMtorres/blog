@@ -1,6 +1,6 @@
 <?php
 
-use App\Entry;
+use App\Tweet;
 use App\User;
 use Illuminate\Database\Seeder;
 
@@ -16,7 +16,7 @@ class EntriesTableSeeder extends Seeder
         $users=User::all();
 
         $users->each(function($user){
-         factory(Entry::class,10)->create([
+         factory(Tweet::class,10)->create([
          	'user_id' => $user->id
          ]);
         });

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Entry;
+use App\Tweet;
 use Illuminate\Http\Request;
 
 class EntryController extends Controller
@@ -20,20 +20,21 @@ class EntryController extends Controller
     public function store(Request $request)
     {
     	$validateData=$request->validate([
-    		'title' => 'required|min:7|max:255|unique:entries',
     		'content' => 'required|min:20|max:1000'
     	]);	
 
-    	$entrada= new Entry();
-    	$entrada->title=$validateData["title"];
+      //  $parts=explode(' ',$validateData["content"]);
+       // $title=reset($parts);
+    	$entrada= new Tweet();
     	$entrada->content=$validateData["content"];
+        $entrada->title=$validateData["content"];
     	$entrada->user_id=auth()->id();
     	$entrada->save();
     	$status="Nuestra entrada a sido Creada Correctamente";
     	return back()->with(compact('status'));
     }
 
-    public function edit(Entry $entry)
+    public function edit(Tweet $entry)
     {
     
          $this->authorize('update',$entry);
@@ -41,19 +42,26 @@ class EntryController extends Controller
         return view('entries.edit',compact('entry'));
     }
 
-        public function update(Request $request, Entry $entry)
+        public function update(Request $request, Tweet $entry)
     {
         $this->authorize('update',$entry);
         
         $validateData=$request->validate([
-            'title' => 'required|min:7|max:255|unique:entries,id,'.$entry->id,
-            'content' => 'required|min:20|max:1000'
+            'content' => 'required|min:20|max:1000',
         ]); 
 
-        $entry->title=$validateData["title"];
+    
         $entry->content=$validateData["content"];
         $entry->save();
         $status="Tu entrada a sido Modificada Correctamente";
         return back()->with(compact('status'));
     }
-}
+
+    public function delete($id)
+    {
+                //
+        Tweet::find($id)->delete();
+        return back()->with(compact('status'));
+    }
+
+    }

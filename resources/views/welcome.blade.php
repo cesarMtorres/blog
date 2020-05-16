@@ -1,28 +1,25 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
-            <h1 class="mb-4">Ultimas Entradas</h1>
+        <div class="col-md-12">
+            <h1 class="mb-4">Ultimos Tweet</h1>
+                <user-component></user-component>
                 @foreach($entries as $entry)
-         <div class="card mb-4">
+    
                 <div class="card-header">
-                    {{$entry->id }}. {{$entry->title}}.
-                    
+                    <a href="{{url('@'.$entry->user->username)}}">
+                    {{$entry->user->name}} {{'@'.$entry->user->username}}
+                    </a>
                 </div>
 
                 <div class="card-body">
                     <p>{{$entry->content}}</p>
                 </div>
-               <div class="card-footer">
-                Autor:
-                <a href="{{url('@'.$entry->user->username)}}">
-                    
-                    {{ $entry->user->name}}
-                </a>
-               </div>
-            </div>
+
+                <hr>
                     
                 @endforeach
                 {{$entries->links()}}
@@ -30,3 +27,4 @@
     </div>
 </div>
 @endsection
+
