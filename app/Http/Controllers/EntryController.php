@@ -13,6 +13,11 @@ class EntryController extends Controller
     	$this->middleware('auth');
     }
 
+    public function index(){
+        return  Tweet::with('user')
+        ->where('user_id', auth()->id())->get();
+    }
+
     public function create(){
     	return view("entries.create");
     }
@@ -59,9 +64,9 @@ class EntryController extends Controller
 
     public function delete($id)
     {
-                //
+        $this->authorize('delete', $id);
         Tweet::find($id)->delete();
-        return back()->with(compact('status'));
+        
     }
 
     }

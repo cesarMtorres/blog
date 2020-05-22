@@ -15,15 +15,6 @@ $entries=Tweet::with('user')
     	->orderByDesc('id')
     	->paginate(10);
     	return view('welcome',compact('entries'));
-
- /*           return response()->json([
-            'entries' => \App\Tweet::with('user')
-        ->orderByDesc('created_at')
-        ->orderByDesc('id')
-        ->paginate(10)
-        ], Response::HTTP_OK);
-
-        */
     }
 
     public function show(Tweet $entryBySlug)

@@ -1,21 +1,19 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\User;
 
 Route::get('/','GuestController@index');
 
-Route::get('post/{post:slug}',function(App\Post $post){
-	dd($post);
-});
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-// api Route::apiResource('entries', 'EntryController');
+Route::apiResource('entries', 'EntryController');
 
+Route::apiResource('/tareas', 'API/HomeController');
 
-Route::get('/entries/create', 'EntryController@create');
+//Route::get('/entries/create', 'EntryController@create');
 Route::post('/entries', 'EntryController@store');
 
 Route::get('/entries/{entryBySlug}', 'GuestController@show');
@@ -28,3 +26,5 @@ Route::put('/entries/{entry}', 'EntryController@update');
 Route::get('/@{user}', 'UserController@show'); 
 
 Route::apiResource('thoughts', 'ThoughtController');
+
+

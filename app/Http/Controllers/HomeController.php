@@ -22,10 +22,43 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        $entries= Tweet::where('user_id',auth()->id())->get();
+        if($request->ajax())
+        {
+            return Tweet::where('user_id', auth()->id()->get());
 
-        return view('home',compact('entries'));
+        }  else{
+            return view('home');
+        }     
     }
+
+
+    public function store(Request $request)
+    {
+        $tweet=new Tweet();
+        $tweet->title=$request->content;
+        $tweet->content=$request->content;
+        $tweet->user_id=$request->auth()->id();
+        $tweet->save();
+
+        return $tweet;
+    }
+
+        public function update(Request $request,$id)
+    {
+        $tweet=Tweet::find($id);
+        $tweet->title=$request->content;
+        $tweet->content=$request->content;
+        $tweet->user_id=$request->auth()->id();
+        $tweet->save();
+
+        return $tweet;
+    }
+    public function destroy($id)
+    {
+        $tweet=Tweet::find($id);
+        $tweet->delete();
+    }
+    
 }

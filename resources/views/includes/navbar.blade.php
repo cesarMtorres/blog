@@ -13,9 +13,7 @@
                         <li class="nav-item">
                                 <a class="nav-link" href="{{ url('/') }}">Otros Tweets</a>
                             </li>
-                        <li class="nav-item">
-                                <a class="nav-link" href="{{ url('/entries/create') }}">Nuevo Tweet</a>
-                            </li>
+
                        <li class="nav-item">
                                 <a class="nav-link" href="{{ url('/home') }}">Mis Tweet</a>
                             </li>
